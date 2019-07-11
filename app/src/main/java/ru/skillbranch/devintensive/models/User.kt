@@ -28,14 +28,14 @@ class User(
     constructor(id: String) : this(id, "Firstname", "Lastname $id ")
 
     companion object Factory {
-        private var id: Int = -1
+        private var idLast: Int = -1
 
         fun makeUser(fullName: String?): User {
-            id++
+            idLast++
             fullName?.split(" ")
             val (firstName, lastName) = Utils.parseFullName(fullName)
 
-            return User("$id", firstName, lastName)
+            return User("$idLast", firstName, lastName)
         }
     }
 
@@ -58,6 +58,6 @@ class User(
         fun lastVisit(lastVisit: Date? = Date()) = apply {this.lastVisit = lastVisit}
         fun isOnline(isOnline:Boolean = false) = apply {this.isOnline = isOnline}
 
-        fun build() = User ("1", firstName, lastName, avatar, rating, respect, lastVisit, isOnline)
+        fun build() = User (id ?: (++idLast).toString(), firstName, lastName, avatar, rating, respect, lastVisit, isOnline)
     }
 }
