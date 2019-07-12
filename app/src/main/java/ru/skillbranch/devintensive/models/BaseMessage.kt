@@ -24,8 +24,9 @@ abstract class BaseMessage(
         ): BaseMessage {
             id++
             return when (type) {
-                "image" -> ImageMessage("$id", from, chat, isIncoming, date, payload.toString())
-                else -> TextMessage("$id", from, chat, isIncoming, date, payload.toString())
+                "image" -> ImageMessage("$id", from, chat, date = date, image = payload as String, isIncoming = isIncoming)
+                "text" -> TextMessage("$id", from, chat, date = date, text = payload as String, isIncoming = isIncoming)
+                else -> throw IllegalStateException()
             }
 
         }
