@@ -39,7 +39,7 @@ class User(
         }
     }
 
-    data class Builder(
+    class Builder(
         var id: String? = null,
         var firstName: String? = null,
         var lastName: String? = null,
