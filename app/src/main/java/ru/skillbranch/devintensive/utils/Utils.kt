@@ -18,8 +18,15 @@ object Utils {
         return Pair(firstName, lastName)
     }
 
-    fun toInitials(firstName: String?, lastName: String?) {
+    fun String.customFirst() :String = when {
+        (trim() == "") -> ""
+        else -> trim().first().toString()
+    }
 
+    fun toInitials(firstName: String?, lastName: String?): String? = when {
+        (firstName == null && lastName == null) -> null
+        (firstName?.trim() == "" && lastName?.trim() == "") -> null
+        else -> (firstName?.customFirst() + lastName?.customFirst()).toUpperCase()
     }
 
 
