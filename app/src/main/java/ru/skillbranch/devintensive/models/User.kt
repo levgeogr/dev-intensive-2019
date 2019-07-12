@@ -32,32 +32,34 @@ class User(
 
         fun makeUser(fullName: String?): User {
             idLast++
-            fullName?.split(" ")
+//            fullName?.split(" ")
             val (firstName, lastName) = Utils.parseFullName(fullName)
 
-            return User("$idLast", firstName, lastName)
+            return User(idLast.toString(), firstName, lastName)
         }
     }
 
     data class Builder(
-        var id:String? = null,
-        var firstName:String? = null,
-        var lastName:String? = null,
-        var avatar:String? = null,
-        var rating:Int = 0,
-        var respect:Int = 0,
+        var id: String? = null,
+        var firstName: String? = null,
+        var lastName: String? = null,
+        var avatar: String? = null,
+        var rating: Int = 0,
+        var respect: Int = 0,
         var lastVisit: Date? = Date(),
-        var isOnline:Boolean = false
+        var isOnline: Boolean = false
     ) {
-        fun id(id: String?) = apply {this.id = id}
-        fun firstName(firstName: String?) = apply {this.firstName = firstName}
-        fun lastName(lastName: String?) = apply {this.lastName = lastName}
-        fun avatar(avatar: String?) = apply {this.avatar = avatar}
-        fun rating(rating:Int = 0) = apply {this.rating = rating}
-        fun respect(respect:Int = 0) = apply {this.respect = respect}
-        fun lastVisit(lastVisit: Date? = Date()) = apply {this.lastVisit = lastVisit}
-        fun isOnline(isOnline:Boolean = false) = apply {this.isOnline = isOnline}
+        fun id(id: String?) = apply { this.id = id }
+        fun firstName(firstName: String?) = apply { this.firstName = firstName }
+        fun lastName(lastName: String?) = apply { this.lastName = lastName }
+        fun avatar(avatar: String?) = apply { this.avatar = avatar }
+        fun rating(rating: Int = 0) = apply { this.rating = rating }
+        fun respect(respect: Int = 0) = apply { this.respect = respect }
+        fun lastVisit(lastVisit: Date? = Date()) = apply { this.lastVisit = lastVisit }
+        fun isOnline(isOnline: Boolean = false) = apply { this.isOnline = isOnline }
 
-        fun build() = User (id ?: (++idLast).toString(), firstName, lastName, avatar, rating, respect, lastVisit, isOnline)
+        fun build(): User {
+            return User(id ?: (++idLast).toString(), firstName, lastName, avatar, rating, respect, lastVisit, isOnline)
+        }
     }
 }
