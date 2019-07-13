@@ -49,17 +49,58 @@ class User(
         var lastVisit: Date? = Date()
         var isOnline: Boolean = false
 
-        fun id(id: String?) = apply { this.id = id }
-        fun firstName(firstName: String?) = apply { this.firstName = firstName }
-        fun lastName(lastName: String?) = apply { this.lastName = lastName }
-        fun avatar(avatar: String?) = apply { this.avatar = avatar }
-        fun rating(rating: Int = 0) = apply { this.rating = rating }
-        fun respect(respect: Int = 0) = apply { this.respect = respect }
-        fun lastVisit(lastVisit: Date? = Date()) = apply { this.lastVisit = lastVisit }
-        fun isOnline(isOnline: Boolean = false) = apply { this.isOnline = isOnline }
+//        fun id(id: String?) = apply { this.id = id }
+//        fun firstName(firstName: String?) = apply { this.firstName = firstName }
+//        fun lastName(lastName: String?) = apply { this.lastName = lastName }
+//        fun avatar(avatar: String?) = apply { this.avatar = avatar }
+//        fun rating(rating: Int = 0) = apply { this.rating = rating }
+//        fun respect(respect: Int = 0) = apply { this.respect = respect }
+//        fun lastVisit(lastVisit: Date? = Date()) = apply { this.lastVisit = lastVisit }
+//        fun isOnline(isOnline: Boolean = false) = apply { this.isOnline = isOnline }
+
+        fun id(id: String): Builder {
+            this.id = id
+            return this
+        }
+
+        fun firstName(firstName: String?): Builder {
+            this.firstName = firstName
+            return this
+        }
+
+        fun lastName(lastName: String?): Builder {
+            this.lastName = lastName
+            return this
+        }
+
+        fun avatar(avatar: String?): Builder {
+            this.avatar = avatar
+            return this
+        }
+
+        fun rating(rating: Int): Builder {
+            this.rating = rating
+            return this
+        }
+
+        fun respect(respect: Int): Builder {
+            this.respect = respect
+            return this
+        }
+
+        fun lastVisit(lastVisit: Date?): Builder {
+            this.lastVisit = lastVisit
+            return this
+        }
+
+        fun isOnline(isOnline: Boolean): Builder {
+            this.isOnline = isOnline
+            return this
+        }
 
         fun build(): User {
-            return User(id ?: (++idLast).toString(), firstName, lastName, avatar, rating, respect, lastVisit, isOnline)
+            return User(id
+                ?: (++idLast).toString(), firstName, lastName, avatar, rating, respect, lastVisit, isOnline)
         }
     }
 }
