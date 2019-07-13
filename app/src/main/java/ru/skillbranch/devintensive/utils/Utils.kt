@@ -3,7 +3,7 @@ package ru.skillbranch.devintensive.utils
 object Utils {
 
     fun parseFullName(fullName: String?): Pair<String?, String?> {
-        var names: List<String>? = fullName?.split(" ")
+        val names: List<String>? = fullName?.split(" ")
 
         var firstName = names?.getOrNull(0)
         var lastName = names?.getOrNull(1)
@@ -19,20 +19,15 @@ object Utils {
         return Pair(firstName, lastName)
     }
 
-    fun String.customFirst(): String = when {
-        (trim() == "") -> ""
-        else -> trim().first().toString()
-    }
-
-    fun toInitials(firstName: String?, lastName: String?): String? = when {
-        (firstName == null && lastName == null) -> null
-        (firstName?.trim() == "" && lastName?.trim() == "") -> null
-        else -> (firstName?.customFirst() + lastName?.customFirst()).toUpperCase()
+    fun toInitials(firstName: String?, lastName: String?): String? {
+        val first = firstName?.trim()?.capitalize()?.getOrNull(0)
+        val last = lastName?.trim()?.capitalize()?.getOrNull(0)
+        return if (first == null && last == null) null else "${first ?: ""}${last ?: ""}"
     }
 
 
     fun transliteration(payload: String?, divider: String = " "): String {
-        var res: String = ""
+        var res = ""
         payload?.forEach {
             res += when {
                 (it == ' ') -> divider
