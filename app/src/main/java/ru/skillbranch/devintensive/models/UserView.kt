@@ -11,7 +11,7 @@ class UserView(
 
     fun printMe() {
         println("""
-            id: $id,
+            lastId: $id,
             fullName: $fullName,
             nickName: $nickName,
             avatar: $avatar,
