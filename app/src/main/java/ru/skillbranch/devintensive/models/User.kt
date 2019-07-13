@@ -39,16 +39,16 @@ class User(
         }
     }
 
-    class Builder(
-        var id: String? = null,
-        var firstName: String? = null,
-        var lastName: String? = null,
-        var avatar: String? = null,
-        var rating: Int = 0,
-        var respect: Int = 0,
-        var lastVisit: Date? = Date(),
+    class Builder {
+        var id: String? = null
+        var firstName: String? = null
+        var lastName: String? = null
+        var avatar: String? = null
+        var rating: Int = 0
+        var respect: Int = 0
+        var lastVisit: Date? = Date()
         var isOnline: Boolean = false
-    ) {
+
         fun id(id: String?) = apply { this.id = id }
         fun firstName(firstName: String?) = apply { this.firstName = firstName }
         fun lastName(lastName: String?) = apply { this.lastName = lastName }
