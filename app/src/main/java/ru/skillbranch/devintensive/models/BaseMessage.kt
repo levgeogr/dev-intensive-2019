@@ -12,20 +12,13 @@ abstract class BaseMessage(
     abstract fun formatMessage(): String
 
     companion object AbstractFactory {
-        var id = -1
+        var lastId = -1
 
-        fun makeMessage(
-            from: User?,
-            chat: Chat,
-            date: Date = Date(),
-            type: String = "text",
-            payload: Any?,
-            isIncoming: Boolean = false
-        ): BaseMessage {
-            id++
+        fun makeMessage(from: User?, chat: Chat, date: Date = Date(), type: String = "text", payload: Any?, isIncoming: Boolean = false): BaseMessage {
+            lastId++
             return when (type) {
-                "image" -> ImageMessage("$id", from, chat, date = date, image = payload as String, isIncoming = isIncoming)
-                "text" -> TextMessage("$id", from, chat, date = date, text = payload as String, isIncoming = isIncoming)
+                "image" -> ImageMessage(lastId.toString(), from, chat, date = date, image = payload as String, isIncoming = isIncoming)
+                "text" -> TextMessage(lastId.toString(), from, chat, date = date, text = payload as String, isIncoming = isIncoming)
                 else -> throw IllegalStateException()
             }
 
