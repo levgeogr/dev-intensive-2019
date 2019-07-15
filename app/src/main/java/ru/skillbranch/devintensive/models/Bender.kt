@@ -42,8 +42,8 @@ class Bender(
     }
 
     enum class Question(val question: String, val answers: List<String>) {
-        NAME("Как меня зовут?", listOf("бендер", "bender")),
-        PROFESSION("Отлично - ты справился\nНазови мою профессию?", listOf("сгибальщик", "bender")),
+        NAME("Как меня зовут?", listOf("бендер", "bender_dance")),
+        PROFESSION("Отлично - ты справился\nНазови мою профессию?", listOf("сгибальщик", "bender_dance")),
         MATERIAL("Из чего я сделан?", listOf("металл", "дерево", "iron", "metal", "wood")),
         BDAY("Когда меня создали?", listOf("2993")),
         SERIAL("Мой серийный номер?", listOf("2716057")),
