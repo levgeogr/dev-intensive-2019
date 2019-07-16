@@ -15,7 +15,7 @@ class Bender(
         Question.IDLE -> Question.IDLE.question
     }
 
-    fun listenAnswer(answer: String): Pair<String?, Triple<Int, Int, Int>?> {
+    fun listenAnswer(answer: String): Pair<String, Triple<Int, Int, Int>> {
         return if (question.answers.contains(answer)) {
             question = question.nextQuestion()
             "Отлично - ты справился\n${question.question}" to status.color
@@ -32,18 +32,26 @@ class Bender(
         DANGER(Triple(255, 60, 60)),
         CRITICAL(Triple(255, 0, 0));
 
-        fun nextStatus(): Status = when (this) {
-            NORMAL -> WARNING
-            WARNING -> DANGER
-            DANGER -> CRITICAL
-            CRITICAL -> CRITICAL
+        fun nextStatus(): Status
+//        = when (this)
+        {
+//            NORMAL -> WARNING
+//            WARNING -> DANGER
+//            DANGER -> CRITICAL
+//            CRITICAL -> NORMAL
+
+            return if (this.ordinal < values().lastIndex) {
+                values()[this.ordinal + 1]
+            } else {
+                values()[0]
+            }
         }
 
     }
 
     enum class Question(val question: String, val answers: List<String>) {
-        NAME("Как меня зовут?", listOf("бендер", "bender_dance")),
-        PROFESSION("Отлично - ты справился\nНазови мою профессию?", listOf("сгибальщик", "bender_dance")),
+        NAME("Как меня зовут?", listOf("бендер", "bender")),
+        PROFESSION("Назови мою профессию?", listOf("сгибальщик", "bender")),
         MATERIAL("Из чего я сделан?", listOf("металл", "дерево", "iron", "metal", "wood")),
         BDAY("Когда меня создали?", listOf("2993")),
         SERIAL("Мой серийный номер?", listOf("2716057")),
