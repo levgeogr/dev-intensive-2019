@@ -62,12 +62,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun sendAnswerToBender() {
         val userAnswer = etMessage.text.toString().trim()
+        hideKeyboard()
         if (userAnswer.isEmpty()) return
         val (phrase, color) = bender.listenAnswer(userAnswer)
         setBenderColor(color)
         questionTv.text = phrase
         etMessage.setText("")
-        hideKeyboard()
     }
 
     private fun setBenderColor(color: Triple<Int, Int, Int>) {
