@@ -61,7 +61,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun sendAnswerToBender() {
-        val (phrase, color) = bender.listenAnswer(etMessage.text.toString().trim())
+        val userAnswer = etMessage.text.toString().trim()
+        if (userAnswer.isEmpty()) return
+        val (phrase, color) = bender.listenAnswer(userAnswer)
         setBenderColor(color)
         questionTv.text = phrase
         etMessage.setText("")
@@ -75,8 +77,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onSaveInstanceState(outState: Bundle?) {
         super.onSaveInstanceState(outState)
-        outState?.putString(Companion.STATUS, bender.status.name)
-        outState?.putString(Companion.QUESTION, bender.question.name)
+        outState?.putString(STATUS, bender.status.name)
+        outState?.putString(QUESTION, bender.question.name)
         Log.d("M_MainActivity", "onSaveInstanceState ${bender.status.name} ${bender.question.name}")
     }
 
