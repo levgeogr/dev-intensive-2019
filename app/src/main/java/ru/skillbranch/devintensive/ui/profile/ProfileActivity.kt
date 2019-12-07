@@ -1,21 +1,21 @@
-package ru.skillbranch.devintensive
+package ru.skillbranch.devintensive.ui.profile
 
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.util.Log
 import android.view.KeyEvent
-import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_main.*
+import ru.skillbranch.devintensive.R
 import ru.skillbranch.devintensive.extensions.hideKeyboard
 import ru.skillbranch.devintensive.models.Bender
 
-class MainActivity : AppCompatActivity() {
+class ProfileActivity : AppCompatActivity() {
     lateinit var etMessage: EditText
     lateinit var ivBender: ImageView
     lateinit var questionTv: TextView
@@ -24,12 +24,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-        etMessage = et_message
-        ivBender = iv_bender
-        questionTv = tv_text
-        sendButton = iv_send
+        setContentView(R.layout.activity_profile)
 
         val status = savedInstanceState?.getString(STATUS) ?: Bender.Status.NORMAL.name
         val question = savedInstanceState?.getString(QUESTION) ?: Bender.Question.NAME.name
@@ -37,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         bender = Bender(Bender.Status.valueOf(status), Bender.Question.valueOf(question))
         setBenderColor(bender.status.color)
 
-        etMessage.setOnEditorActionListener { v, actionId, event ->
+        etMessage.setOnEditorActionListener { _, actionId, event ->
             val imeAction = when (actionId) {
                 EditorInfo.IME_ACTION_DONE,
                 EditorInfo.IME_ACTION_SEND,
@@ -45,12 +40,12 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
 
-            val keydownEvent = event?.keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_DOWN
+            val keyDownEvent = event?.keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_DOWN
 
-            if (imeAction or keydownEvent)
+            if (imeAction or keyDownEvent)
                 sendAnswerToBender()
 
-            imeAction or keydownEvent
+            imeAction or keyDownEvent
         }
 
         sendButton.setOnClickListener {
@@ -75,8 +70,8 @@ class MainActivity : AppCompatActivity() {
         ivBender.setColorFilter(Color.rgb(r, g, b), PorterDuff.Mode.MULTIPLY)
     }
 
-    override fun onSaveInstanceState(outState: Bundle?) {
-        super.onSaveInstanceState(outState)
+    override fun onSaveInstanceState(outState: Bundle?, outPersistentState: PersistableBundle?) {
+        super.onSaveInstanceState(outState, outPersistentState)
         outState?.putString(STATUS, bender.status.name)
         outState?.putString(QUESTION, bender.question.name)
         Log.d("M_MainActivity", "onSaveInstanceState ${bender.status.name} ${bender.question.name}")
