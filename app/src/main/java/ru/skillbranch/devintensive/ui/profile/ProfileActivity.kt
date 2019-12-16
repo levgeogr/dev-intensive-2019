@@ -74,7 +74,7 @@ class ProfileActivity : AppCompatActivity() {
     fun initViewModel() {
         viewModel = ViewModelProviders.of(this).get(ProfileViewModel::class.java)
         viewModel.getProfileData().observe(this, Observer { updateUI(it) })
-        viewModel.getTheme().observe(this, Observer { updateTheme(it)  })
+        viewModel.getTheme().observe(this, Observer { updateTheme(it) })
     }
 
     private fun updateUI(profile: Profile) {
@@ -86,8 +86,9 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun updateTheme(mode: Int) {
-        delegate.localNightMode = mode
+        delegate.setLocalNightMode(mode)
     }
+
     private fun showCurrentMode(mode: Boolean) {
         val info = fields.filter { setOf("firstname", "lastname", "about", "repository").contains(it.key) }
 
