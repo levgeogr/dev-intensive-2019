@@ -27,6 +27,11 @@ fun Date.add(valueAdd: Int, units: TimeUnits = TimeUnits.SECOND): Date {
     return this
 }
 
+fun Date.shortFormat(): String? {
+//    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    return ""
+}
+
 fun Date.humanizeDiff(date: Date = Date()): String {
 
     return when {
